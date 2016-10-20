@@ -47,4 +47,22 @@ public class MainActivity extends AppCompatActivity {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
     }
+
+    /**
+     * This method increments the amount of coffees
+     */
+    public void increment(View view) {
+        int quantity = 3;
+        display(quantity);
+        displayPrice(quantity * 5);
+    }
+
+    /**
+     * This method decrements the amount of coffees
+     */
+    public void decrement(View view) {
+        int quantity = 1;
+        display(quantity);
+        displayPrice(quantity * 5);
+    }
 }
