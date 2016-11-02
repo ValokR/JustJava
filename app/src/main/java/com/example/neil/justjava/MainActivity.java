@@ -6,10 +6,12 @@
  */
 
 package com.example.neil.justjava;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+
 import java.text.NumberFormat;
 
 /**
@@ -46,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        String priceMessage = "Your total is $" + (quantity * 5);
+        int price = quantity * 5;
+        String priceMessage = "Total: $" + price + " \nThank You!";
         displayMessage(priceMessage);
     }
 
