@@ -10,6 +10,7 @@ package com.example.neil.justjava;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     int quantity = 2;
+    boolean isWhipped = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void increment(View view) {
         quantity = quantity + 1;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
@@ -41,39 +43,49 @@ public class MainActivity extends AppCompatActivity {
      */
     public void decrement(View view) {
         quantity = quantity - 1;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int price = quantity * 5;
-        String priceMessage = "Total: $" + price + " \nThank You!";
+        int price = calculatePrice();
+        CheckBox isWhippedCheckBox = (CheckBox) findViewById(R.id.whipped_cream_check_box);
+        isWhipped = isWhippedCheckBox.isChecked();
+        String priceMessage = createOrderSummary(price);
         displayMessage(priceMessage);
     }
 
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int amount) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + number);
-    }
-
-    /**
-     * This method displays the given price on the screen.
-     */
-    private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
+        quantityTextView.setText("" + amount);
     }
 
     /**
      * This method displays the given text on the screen.
      */
     private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(message);
+        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
+        orderSummaryTextView.setText(message);
+    }
+
+    private int calculatePrice() {
+        int price = quantity * 5;
+        return price;
+    }
+
+    /**
+     * Creates a text summary of an order
+     *
+     * @param price
+     * @return order summary
+     */
+    public String createOrderSummary(int price) {
+        String orderSummary = "Name: Neil Ruggiero \nAdd Whipped Cream? " + isWhipped + "\nQuantity: " + quantity + "\nTotal: " + price + "\nThank you!";
+        return orderSummary;
     }
 }
