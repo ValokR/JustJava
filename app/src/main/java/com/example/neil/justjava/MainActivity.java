@@ -82,8 +82,10 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Creates a text summary of an order
      *
-     * @param price
-     * @return order summary
+     * @param price of order
+     * @param chocolate whether or not chocolate is added
+     * @param isWhipped whether or not whipped cream is added
+     * @return Text bases summary of order
      */
     public String createOrderSummary(int price, boolean isWhipped, boolean chocolate) {
         String orderSummary = "Name: Neil Ruggiero";
