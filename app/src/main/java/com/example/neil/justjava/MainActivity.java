@@ -22,8 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     int quantity = 2;
-    boolean isWhipped = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +50,11 @@ public class MainActivity extends AppCompatActivity {
     public void submitOrder(View view) {
         int price = calculatePrice();
         CheckBox isWhippedCheckBox = (CheckBox) findViewById(R.id.whipped_cream_check_box);
-        isWhipped = isWhippedCheckBox.isChecked();
-        String priceMessage = createOrderSummary(price);
+        boolean isWhipped = isWhippedCheckBox.isChecked();
+
+        CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_check_box);
+        boolean chocolate = chocolateCheckBox.isChecked();
+        String priceMessage = createOrderSummary(price, isWhipped, chocolate);
         displayMessage(priceMessage);
     }
 
@@ -84,8 +85,13 @@ public class MainActivity extends AppCompatActivity {
      * @param price
      * @return order summary
      */
-    public String createOrderSummary(int price) {
-        String orderSummary = "Name: Neil Ruggiero \nAdd Whipped Cream? " + isWhipped + "\nQuantity: " + quantity + "\nTotal: " + price + "\nThank you!";
+    public String createOrderSummary(int price, boolean isWhipped, boolean chocolate) {
+        String orderSummary = "Name: Neil Ruggiero";
+        orderSummary += "\nAdd Whipped Cream? " + isWhipped;
+        orderSummary += "\nAdd Chocolate? " + chocolate;
+        orderSummary += "\nQuantity: " + quantity;
+        orderSummary += "\nTotal: " + price;
+        orderSummary += "\nThank you!";
         return orderSummary;
     }
 }
