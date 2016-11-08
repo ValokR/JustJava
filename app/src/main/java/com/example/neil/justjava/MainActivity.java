@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import java.text.NumberFormat;
 
+import static android.R.attr.name;
 import static android.R.id.message;
 import static java.net.Proxy.Type.HTTP;
 
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void increment(View view) {
         if (quantity == 100) {
-            Toast.makeText(this, "You cannot order more than 100 coffees", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.too_many_coffees_toast), Toast.LENGTH_SHORT).show();
             return;
         }
         quantity = quantity + 1;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void decrement(View view) {
         if (quantity == 1) {
-            Toast.makeText(this, "You cannot order less than 1 coffee", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.too_little_coffees_toast), Toast.LENGTH_SHORT).show();
             return;
         }
         quantity = quantity - 1;
@@ -81,10 +82,9 @@ public class MainActivity extends AppCompatActivity {
 
         String orderSummary = createOrderSummary(price, isWhipped, chocolate, userName);
 
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("*/*");
-        intent.putExtra(Intent.EXTRA_EMAIL, "nruggier@gmail.com");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "New Order");
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject) + " " + userName);
         intent.putExtra(Intent.EXTRA_TEXT, orderSummary);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
@@ -127,12 +127,12 @@ public class MainActivity extends AppCompatActivity {
      * @return Text bases summary of order
      */
     public String createOrderSummary(int price, boolean isWhipped, boolean chocolate, String name) {
-        String orderSummary = "Name: " + name;
-        orderSummary += "\nAdd Whipped Cream? " + isWhipped;
-        orderSummary += "\nAdd Chocolate? " + chocolate;
-        orderSummary += "\nQuantity: " + quantity;
-        orderSummary += "\nTotal: $" + price;
-        orderSummary += "\nThank you!";
+        String orderSummary = getString(R.string.order_summary_name) + name;
+        orderSummary += "\n" + getString(R.string.order_summary_whipped_cream) + isWhipped;
+        orderSummary += "\n" + getString(R.string.order_summary_chocolate) + chocolate;
+        orderSummary += "\n" + getString(R.string.order_summary_quantity) + quantity;
+        orderSummary += "\n" + getString(R.string.order_summary_total) + price;
+        orderSummary += "\n" + getString(R.string.order_summary_thank_you);
 
         return orderSummary;
     }
