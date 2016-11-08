@@ -50,15 +50,19 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int price = calculatePrice();
+        // whether or not whipped cream is selected
         CheckBox isWhippedCheckBox = (CheckBox) findViewById(R.id.whipped_cream_check_box);
         boolean isWhipped = isWhippedCheckBox.isChecked();
 
+        // whether or not chocolate is selected
         CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_check_box);
         boolean chocolate = chocolateCheckBox.isChecked();
 
+        // get user name from input field
         EditText nameTextField = (EditText) findViewById(R.id.name_input_field);
         String userName = nameTextField.getText().toString();
+
+        int price = calculatePrice(isWhipped, chocolate);
 
         String priceMessage = createOrderSummary(price, isWhipped, chocolate, userName);
         displayMessage(priceMessage);
@@ -80,8 +84,17 @@ public class MainActivity extends AppCompatActivity {
         orderSummaryTextView.setText(message);
     }
 
-    private int calculatePrice() {
-        int price = quantity * 5;
+    private int calculatePrice(boolean isWhipped, boolean chocolate) {
+        int pricePerCup = 5;
+
+        if (isWhipped) {
+            pricePerCup += 1;
+        }
+
+        if (chocolate) {
+            pricePerCup += 2;
+        }
+        int price = quantity * pricePerCup;
         return price;
     }
 
