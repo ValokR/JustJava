@@ -8,6 +8,8 @@
 package com.example.neil.justjava;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,6 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.NumberFormat;
+
+import static android.R.id.message;
+import static java.net.Proxy.Type.HTTP;
 
 /**
  * This app displays an order form to order coffee.
@@ -74,8 +79,16 @@ public class MainActivity extends AppCompatActivity {
 
         int price = calculatePrice(isWhipped, chocolate);
 
-        String priceMessage = createOrderSummary(price, isWhipped, chocolate, userName);
-        displayMessage(priceMessage);
+        String orderSummary = createOrderSummary(price, isWhipped, chocolate, userName);
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("*/*");
+        intent.putExtra(Intent.EXTRA_EMAIL, "nruggier@gmail.com");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "New Order");
+        intent.putExtra(Intent.EXTRA_TEXT, orderSummary);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     /**
@@ -87,16 +100,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * This method displays the given text on the screen.
-     */
-    private void displayMessage(String message) {
-        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-        orderSummaryTextView.setText(message);
-    }
-
-    /**
-     *
-     *
      * @param isWhipped did the user want whipped cream?
      * @param chocolate did the user want chocolate
      * @return price total based on toppings
@@ -128,8 +131,9 @@ public class MainActivity extends AppCompatActivity {
         orderSummary += "\nAdd Whipped Cream? " + isWhipped;
         orderSummary += "\nAdd Chocolate? " + chocolate;
         orderSummary += "\nQuantity: " + quantity;
-        orderSummary += "\nTotal: " + price;
+        orderSummary += "\nTotal: $" + price;
         orderSummary += "\nThank you!";
+
         return orderSummary;
     }
 }
