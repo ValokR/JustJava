@@ -1,16 +1,43 @@
 <resources>
+    <!--Title for the application [CHAR LIMIT = 12] -->
     <string name="app_name">Just Java</string>
+
+    <!-- Hint text in name field [CHAR LIMIT = 20]-->
     <string name="name_field">Name</string>
+
+    <!-- Describes the check box section of the app [CHAR LIMIT = 20]-->
     <string name="toppings_header">Toppings</string>
+
+    <!-- description for whipped cream check box [CHAR LIMIT = 20]-->
     <string name="whipped_cream_check_box">Whipped Cream</string>
+
+    <!-- description for chocolate check box [CHAR LIMIT = 20]-->
     <string name="chocolate_check_box">Chocolate</string>
+
+    <!-- Header for the quantity display section [CHAR LIMIT = 20]-->
     <string name="quantity_header">Quantity</string>
+
+    <!-- Text on the order button [CHAR LIMIT = 12]-->
     <string name="order_button">Order</string>
+
+    <!-- Text to be put in subject of e-mail [CHAR LIMIT = none]-->
     <string name="email_subject">Just Java order for</string>
+
+    <!-- Order summary line for the users name in e-mail [CHAR LIMIT = NONE-->
     <string name="order_summary_name">Name: </string>
+
+    <!-- Order Summary line for whipped cream in e-mail [CHAR LIMIT = NONE-->
     <string name="order_summary_whipped_cream">Add Whipped Cream? </string>
+
+    <!-- Order Summary line for chocolate in e-mail [CHAR LIMIT = NONE-->
     <string name="order_summary_chocolate">Add Chocolate? </string>
+
+    <!-- Order Summary line for # of coffees in e-mail [CHAR LIMIT = NONE-->
     <string name="order_summary_quantity">Quantity </string>
+
+    <!-- Order Summary line for total price in e-mail [CHAR LIMIT = NONE-->
     <string name="order_summary_total">Total: $</string>
+
+    <!-- Order Summary line saying thank you in e-mail [CHAR LIMIT = NONE-->
     <string name="order_summary_thank_you">Thank you!</string>
 </resources>
